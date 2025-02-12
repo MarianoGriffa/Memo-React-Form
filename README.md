@@ -61,21 +61,21 @@ Puedes modificar el esquema de validación en `src/models/index.ts` para adaptar
 
 ### Esquema de ejemplo con Zod
 
-``typescript
-import * as z from «zod»;
+```typescript
+import * as z from "zod";
 
 export const schema = z.object({
-  nombre: z.string().min(1, «El nombre es obligatorio»),
-  email: z.string().email(«Debe ser un email válido»),
-  password: z.string().min(8, «La contraseña debe tener al menos 8 caracteres»),
-  confirmPassword: z.string().min(8, «Debe confirmar su contraseña»)
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Must be a valid email"),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
+  confirmPassword: z.string().min(8, "You must confirm your password")
     .refine((val, ctx) => val === ctx.parent.password, {
-      mensaje: «Las contraseñas deben coincidir»,
+      message: "Passwords must match",
     }),
 });
 
 
-exportar tipo FormValues = z.infer<tipo de esquema>;
+export type FormValues = z.infer<typeof schema>;
 
 ```
 
